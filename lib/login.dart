@@ -43,6 +43,7 @@ class _LoginState extends State<Login> {
                                                   ///size.height * 0.5 -> 50%
         child: Column(
           children: [
+            SizedBox(height: size.height * 0.075,),
             Text(                           //Siempre debe de abrir con "(,[,{"
               'INICIAR SESIÓN',             //Hijo -> String
               style: TextStyle(             //atributo
@@ -50,9 +51,20 @@ class _LoginState extends State<Login> {
                   fontSize: 20.0
               ),                            //Debe de cerrarse con "),],}"
             ),
+            buildRow('Usuario:'),
             buildTextFormField('Usuario', false),    //Equivalente a un input
             SizedBox(height: size.height * 0.1,),
+            buildRow('Contraseña:'),
             buildTextFormField('Contraseña', true),    //Equivalente a un input
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  'Olvidaste tu contraseña?',
+                  style: TextStyle(color: cons.gris),
+                )
+              ],
+            ),
             SizedBox(height: size.height * 0.1,),
             ElevatedButton(     //Equivalente a un botón
               style: ElevatedButton.styleFrom(
@@ -86,6 +98,14 @@ class _LoginState extends State<Login> {
           ],
         ),
       )
+    );
+  }
+
+  Row buildRow(String text) {
+    return Row(
+      children: [
+        Text(text, style: TextStyle(fontSize: 16),),
+      ],
     );
   }
 
