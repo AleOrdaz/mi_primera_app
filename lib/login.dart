@@ -1,5 +1,7 @@
+import 'package:app1920/widgets/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:app1920/constantes.dart' as cons;
+import 'package:flutter/scheduler.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -65,6 +67,18 @@ class _LoginState extends State<Login> {
                   print('Se presiono el botón');
                   print('Usuario: ${usuario.text}');
                   print('Contraseña: ${password.text}');
+                  
+                  if(usuario.text == cons.usuario &&
+                      password.text ==  cons.pass){
+                    //Cambiar de vista
+                    //Remplazamaos la vista actual y hace push a la nueva
+                    Navigator.pushReplacement(context, 
+                        MaterialPageRoute(builder:
+                            (context) => /*NUEVA VISTA*/));
+                  } else {
+                    //Mostramos un menesaje de error
+                    ShowSnackbar(context, 'texto', 20);
+                  }
                 });
               },  //Funciones o acción a realizar al presionar el btn
               child: Text('Ingresar'), 
