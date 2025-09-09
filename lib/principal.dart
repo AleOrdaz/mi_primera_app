@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:app1920/constantes.dart' as cons;
 
 class Principal extends StatefulWidget {
   const Principal({super.key});
@@ -14,39 +15,229 @@ class _PrincipalState extends State<Principal> {
       body: Column(
         children: [
           Expanded(
-            flex: 6,
+            flex: 2,
               child: Row(
                 children: [
                   Expanded(
-                    flex: 4,
-                    child: Container(),
+                    flex: 3,
+                    child: InkWell( //Da acción de botón a cualquier widget
+                      onTap: () {
+                        setState(() {
+                          //Cambio de color
+                        });
+                      },
+                      child: Container(
+                        color: cons.azul2,
+                      ),
+                    ),
                   ),
                   Expanded(
-                    flex: 4,
-                    child: Container(),
+                    flex: 3,
+                    child: Container(
+                      color: cons.azul3,
+                    ),
                   ),
                   Expanded(
-                    flex: 4,
-                    child: Container(),
+                    flex: 3,
+                    child: Container(
+                      color: cons.azul1,
+                    ),
+                  ),
+                  Expanded(
+                    flex: 3,
+                    child: Container(
+                      color: cons.gris,
+                    ),
                   ),
                 ],
               ),
           ),
           Expanded(
-            flex: 6,
+            flex: 2,
             child: Row(
               children: [
                 Expanded(
-                  flex: 4,
-                  child: Container(),
+                  flex: 3,
+                  child: InkWell( //Da acción de botón a cualquier widget
+                    onTap: () {
+                      setState(() {
+                        //Cambio de color
+                      });
+                    },
+                    child: Container(
+                      color: cons.azul1,
+                    ),
+                  ),
                 ),
                 Expanded(
-                  flex: 4,
-                  child: Container(),
+                  flex: 3,
+                  child: Container(
+                    color: cons.azul2,
+                  ),
                 ),
                 Expanded(
-                  flex: 4,
-                  child: Container(),
+                  flex: 3,
+                  child: Container(
+                    color: cons.negro,
+                  ),
+                ),
+                Expanded(
+                  flex: 3,
+                  child: Container(
+                    color: cons.azul1,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            flex: 2,
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 3,
+                  child: InkWell( //Da acción de botón a cualquier widget
+                    onTap: () {
+                      setState(() {
+                        //Cambio de color
+                      });
+                    },
+                    child: Container(
+                      color: cons.azul2,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 3,
+                  child: Container(
+                    color: cons.azul3,
+                  ),
+                ),
+                Expanded(
+                  flex: 3,
+                  child: Container(
+                    color: cons.azul1,
+                  ),
+                ),
+                Expanded(
+                  flex: 3,
+                  child: Container(
+                    color: cons.azul1,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            flex: 2,
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 3,
+                  child: InkWell( //Da acción de botón a cualquier widget
+                    onTap: () {
+                      setState(() {
+                        //Cambio de color
+                      });
+                    },
+                    child: Container(
+                      color: cons.azul2,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 3,
+                  child: Container(
+                    color: cons.azul3,
+                  ),
+                ),
+                Expanded(
+                  flex: 3,
+                  child: Container(
+                    color: cons.azul1,
+                  ),
+                ),
+                Expanded(
+                  flex: 3,
+                  child: Container(
+                    color: cons.azul1,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            flex: 2,
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 3,
+                  child: InkWell( //Da acción de botón a cualquier widget
+                    onTap: () {
+                      setState(() {
+                        //Cambio de color
+                      });
+                    },
+                    child: Container(
+                      color: cons.azul2,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 3,
+                  child: Container(
+                    color: cons.azul3,
+                  ),
+                ),
+                Expanded(
+                  flex: 3,
+                  child: Container(
+                    color: cons.azul1,
+                  ),
+                ),
+                Expanded(
+                  flex: 3,
+                  child: Container(
+                    color: cons.azul1,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            flex: 2,
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 3,
+                  child: InkWell( //Da acción de botón a cualquier widget
+                    onTap: () {
+                      setState(() {
+                        //Cambio de color
+                      });
+                    },
+                    child: Container(
+                      color: cons.azul2,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 3,
+                  child: Container(
+                    color: cons.azul3,
+                  ),
+                ),
+                Expanded(
+                  flex: 3,
+                  child: Container(
+                    color: cons.azul1,
+                  ),
+                ),
+                Expanded(
+                  flex: 3,
+                  child: Container(
+                    color: cons.azul1,
+                  ),
                 ),
               ],
             ),

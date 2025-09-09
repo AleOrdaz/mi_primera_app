@@ -1,3 +1,4 @@
+import 'package:app1920/principal.dart';
 import 'package:app1920/widgets/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:app1920/constantes.dart' as cons;
@@ -86,7 +87,7 @@ class _LoginState extends State<Login> {
                     //Remplazamaos la vista actual y hace push a la nueva
                     Navigator.pushReplacement(context, 
                         MaterialPageRoute(builder:
-                            (context) => /*NUEVA VISTA*/));
+                            (context) => Principal()));
                   } else {
                     //Mostramos un menesaje de error
                     ShowSnackbar(context, 'texto', 20);
