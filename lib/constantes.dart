@@ -11,3 +11,12 @@ const azul4 = Color(0xFF2DA193);
 
 const usuario = '';
 const pass = '';
+
+List usuarios = [
+  ///ID # NOMBRE # APELLIDOS # CONTRASEÑA # FECHA_NAC # BANDERA
+  '1#Alejandro#Ordaz#123456#1996/03/23#1',
+  '2#Alejandro#Ordaz#123456#1996/03/23#1',
+  '3#Alejandro#Ordaz#123456#1996/03/23#1',
+  '4#Alejandro#Ordaz#123456#1996/03/23#1',
+  '5#Alejandro#Ordaz#123456#1996/03/23#1',
+];

@@ -1,3 +1,4 @@
+import 'package:app1920/listas.dart';
 import 'package:app1920/login.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: Login()
+      home: Listas()
     );
   }
 }

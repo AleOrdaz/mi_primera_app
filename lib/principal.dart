@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:app1920/constantes.dart' as cons;
 
@@ -9,6 +11,7 @@ class Principal extends StatefulWidget {
 }
 
 class _PrincipalState extends State<Principal> {
+  bool r1 =  false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,10 +27,11 @@ class _PrincipalState extends State<Principal> {
                       onTap: () {
                         setState(() {
                           //Cambio de color
+                          r1 = !r1;
                         });
                       },
                       child: Container(
-                        color: cons.azul2,
+                        color: r1? randomColor() : randomColor(),
                       ),
                     ),
                   ),
@@ -245,5 +249,12 @@ class _PrincipalState extends State<Principal> {
         ],
       )
     );
+  }
+
+
+  /// Devuelve un color aleatorio en formato Color(0xFFxxxxxx)
+  Color randomColor() {
+    final Random random = Random();
+    return Color(0xFF000000 + random.nextInt(0xFFFFFF));
   }
 }
