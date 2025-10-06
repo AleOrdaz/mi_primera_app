@@ -2,6 +2,8 @@ import 'package:app1920/listas.dart';
 import 'package:app1920/login.dart';
 import 'package:flutter/material.dart';
 
+import 'dependencia.dart';
+
 void main() {
   runApp(const MyApp());
 }
