@@ -1,3 +1,4 @@
+import 'package:app1920/utils/database.dart';
 import 'package:flutter/material.dart';
 
 class SQLite extends StatefulWidget {
@@ -6,6 +7,8 @@ class SQLite extends StatefulWidget {
   @override
   State<SQLite> createState() => _SQLiteState();
 }
+
+final dbHelper = DatabaseHelper();
 
 class _SQLiteState extends State<SQLite> {
   @override
@@ -36,7 +39,12 @@ class _SQLiteState extends State<SQLite> {
           title: const Text('Insertar nuevo usuario'),
     content: Column(
       children: [
-
+        TextFormField(
+          controller: name,
+        ),
+        TextFormField(
+          controller: age,
+        )
       ],
     ),
         actions: <Widget>[
@@ -66,4 +74,34 @@ class _SQLiteState extends State<SQLite> {
       );
     )
   }
+
+        void _select() async {
+      final allRows = await dbHelper.queryAllRows();
+      debugPrint('query all rows:');
+      singleton.users = allRows;
+      for (final row in allRows) {
+        debugPrint(row.toString());
+      }
+
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => const Users()));
+    }
+
+    void _update() async {
+      // row to update
+      Map<String, dynamic> row = {
+        DatabaseHelper.columnId: 1,
+        DatabaseHelper.columnName: 'Mary',
+        DatabaseHelper.columnAge: 32
+      };
+      final rowsAffected = await dbHelper.update(row);
+      debugPrint('updated $rowsAffected row(s)');
+    }
+
+    void _delete() async {
+      // Assuming that the number of rows is the id for the last row.
+      final id = await dbHelper.queryRowCount();
+      final rowsDeleted = await dbHelper.delete(id);
+      debugPrint('deleted $rowsDeleted row(s): row $id');
+    }
 }

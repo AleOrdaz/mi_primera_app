@@ -1,10 +1,18 @@
 import 'package:app1920/listas.dart';
 import 'package:app1920/login.dart';
+import 'package:app1920/sqlite.dart';
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
 
 import 'dependencia.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized(); //Inicializa los widgets
+
+  await dbHelper.init(); // initialize the database
+
+  final dir = await getApplicationDocumentsDirectory();
+
   runApp(const MyApp());
 }
 //Clase sin estado
@@ -19,7 +27,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: Listas()
+      home: SQLite()
     );
   }
 }
