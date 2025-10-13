@@ -14,4 +14,6 @@ class Singleton {
   List listUsuarios = [];
   var usuarioE;
   bool edit = false;
+
+
 }

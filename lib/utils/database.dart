@@ -62,7 +62,7 @@ class DatabaseHelper {
   // All of the rows are returned as a list of maps, where each map is
   // a key-value list of columns.
   Future<List<Map<String, dynamic>>> queryAllRows() async {
-    return await _db.query(table);
+    return await _db.query(table); ///SELECT * FROM TABLA
   }
 
 
@@ -88,7 +88,7 @@ class DatabaseHelper {
   // Deletes the row specified by the id. The number of affected rows is
   // returned. This should be 1 as long as the row exists.
   Future<int> delete(int id) async {
-    return await _db.delete(
+    return await _db.delete( //DELETE TABLA WHERE ID = 0;
       table,
       where: '$columnId = ?',
       whereArgs: [id],

@@ -16,11 +16,32 @@ class _SQLiteState extends State<SQLite> {
     return Scaffold(
       body: Column(
         children: [
+          //CRUD
+          //CREATE-READ-UPDATE-DELETE
+          //Agregar-Obtener-Editar-Eliminar
           ElevatedButton(
             onPressed: () {
               _insert(context);
             },
-            child: Text('Agregar datos'),
+            child: Text('Agregar datos C'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              _select();
+            },
+            child: Text('Obtener datos R'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              _update();
+            },
+            child: Text('Editar datos U'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              _delete();
+            },
+            child: Text('Eliminar datos D'),
           )
         ],
       ),
@@ -75,19 +96,19 @@ class _SQLiteState extends State<SQLite> {
     )
   }
 
-        void _select() async {
+  void _select() async {
       final allRows = await dbHelper.queryAllRows();
       debugPrint('query all rows:');
-      singleton.users = allRows;
+      //singleton.users = allRows;
       for (final row in allRows) {
         debugPrint(row.toString());
       }
 
-      Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => const Users()));
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => const SQLite()));
     }
 
-    void _update() async {
+    void _update(ID, NOMBRE, EDAD) async {
       // row to update
       Map<String, dynamic> row = {
         DatabaseHelper.columnId: 1,
@@ -98,7 +119,7 @@ class _SQLiteState extends State<SQLite> {
       debugPrint('updated $rowsAffected row(s)');
     }
 
-    void _delete() async {
+    void _delete(ID) async {
       // Assuming that the number of rows is the id for the last row.
       final id = await dbHelper.queryRowCount();
       final rowsDeleted = await dbHelper.delete(id);
