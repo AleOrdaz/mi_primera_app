@@ -38,6 +38,8 @@ dependencies:
   path_provider: ^2.1.1
   sqflite:                        #se adapta a la version dart
   path: ^1.8.3
+  google_maps_flutter: ^2.5.0
+  geocoding:
 
 dev_dependencies:
   flutter_test:
