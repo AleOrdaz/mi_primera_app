@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "56342004957",
+    "project_id": "appnueva-8a054",
+    "storage_bucket": "appnueva-8a054.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:56342004957:android:ff1d6a0ab9f25d991a4734",
+        "android_client_info": {
+          "package_name": "com.example.app1920"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSR8iEvgEse__JjYCQeYq95ccycPDXpow"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

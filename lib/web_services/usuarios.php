@@ -42,7 +42,7 @@ if($n==1){
             "apellido" => $apellidos[$i],
             "edad" => $edades[$i],
             "nacionalidad" => $nacionalidades[$i],
-            "amigos" => count($amigos) <$i ? $amigos[$i] : []
+            "amigos" => count($amigos) < $i ? $amigos[$i] : []
         ];
     }
 } else {

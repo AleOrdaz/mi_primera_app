@@ -33,13 +33,13 @@ class _SQLiteState extends State<SQLite> {
           ),
           ElevatedButton(
             onPressed: () {
-              _update();
+              //_update();
             },
             child: Text('Editar datos U'),
           ),
           ElevatedButton(
             onPressed: () {
-              _delete();
+              //_delete();
             },
             child: Text('Eliminar datos D'),
           )
@@ -56,44 +56,45 @@ class _SQLiteState extends State<SQLite> {
     showDialog(
         context: context,
         builder: (BuildContext context) {
-      return AlertDialog(
-          title: const Text('Insertar nuevo usuario'),
-    content: Column(
-      children: [
-        TextFormField(
-          controller: name,
-        ),
-        TextFormField(
-          controller: age,
-        )
-      ],
-    ),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop(); // Cerrar el AlertDialog
-            },
-            child: const Text('Cancelar'),
-          ),
-          TextButton(
-            onPressed: () async {
-              ///JSON
-              Map<String, dynamic> row = {
-                DatabaseHelper.columnName: name.text,
-                DatabaseHelper.columnAge: int.parse(age.text)
-              };
-              final id = await dbHelper.insert(row);
+          return AlertDialog(
+            title: const Text('Insertar nuevo usuario'),
+            content: Column(
+              children: [
+                TextFormField(
+                  controller: name,
+                ),
+                TextFormField(
+                  controller: age,
+                )
+              ],
+            ),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Cerrar el AlertDialog
+                },
+                child: const Text('Cancelar'),
+              ),
+              TextButton(
+                onPressed: () async {
+                  ///JSON
+                  Map<String, dynamic> row = {
+                    DatabaseHelper.columnName: name.text,
+                    DatabaseHelper.columnAge: int.parse(age.text)
+                  };
+                  final id = await dbHelper.insert(row);
 
-              debugPrint('inserted row id: $id'); // = print("");
+                  debugPrint('inserted row id: $id'); // = print("");
 
-              Navigator.of(context).pop(); // Cerrar el AlertDialog
-            },
-            child: const Text('Guardar'),
-          ),
-        ],
+                  Navigator.of(context).pop(); // Cerrar el AlertDialog
+                },
+                child: const Text('Guardar'),
+              ),
+            ],
 
-      );
-    )
+          );
+        }
+    );
   }
 
   void _select() async {

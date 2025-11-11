@@ -20,6 +20,11 @@ class _MapaState extends State<Mapa> {
   static const LatLng sourceLocation = LatLng(22.144596, -101.009064);
   static const LatLng destination = LatLng(22.14973, -100.992221);
 
+  //Guardar los puntos con las coordenadas (lat, lng)
+  final List<LatLng> polyPoints = [];
+  //Guardar las lineas sobre el mapa (P1-----P2)
+  final Set<Polyline> polyLines = {};
+
   @override
   void initState() {
     getJsonData(); // Función que realiza el llamado a la api
@@ -48,10 +53,39 @@ class _MapaState extends State<Mapa> {
       print("4 ${data['features'][0]["geometry"]}");
       print("5 ${data['features'][0]["geometry"]["coordinates"]}");
 
+      //Variable para controlar las coordenadas y craer la polyline
+      LineString ls = LineString(data['features'][0]["geometry"]["coordinates"]);
+
+      for(int i = 0; i < ls.lineString.length; i++){
+        //[22.13223451, 101.2156526]
+        polyPoints.add(LatLng(ls.lineString[i][1], ls.lineString[i][0]));
+      }
+
+      setPolyLines();
+
     } catch(e) {
       print('Hubo un error al extraer las coordenadas');
     }
   }
+
+  setPolyLines() {
+    setState(() {
+      print("p1--------p2");
+      Polyline polyline = Polyline(
+        polylineId: PolylineId('poly'),
+        color: Colors.red,
+        width: 6,
+        points: polyPoints
+      );
+      print("p1--------p2--------p3");
+      polyLines.add(polyline);
+    });
+  }
+
+  ///
+  ///       |                        |
+  ///       MO                       MD
+  ///
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +98,35 @@ class _MapaState extends State<Mapa> {
           target: _center, //en cierta posisción
           zoom: 11.0,
         ),
+        polylines: polyLines,
+        markers: {
+          Marker(
+              markerId: MarkerId('Origen'),
+            position: LatLng(22.144596, -101.009064),
+            infoWindow: InfoWindow(title: 'Marca origen'),
+            onTap: () {
+                setState(() {
+                  ///AQUI PUEDEN AGREGAR UN ALERT DIALOG O CUALQUIER OTRO WIDGET
+                });
+            }
+          ),
+          Marker(
+              markerId: MarkerId('Destino'),
+              position: LatLng(22.149730, -100.992221),
+              infoWindow: InfoWindow(title: 'Marca destino'),
+              onTap: () {
+                setState(() {
+                  ///AQUI PUEDEN AGREGAR UN ALERT DIALOG O CUALQUIER OTRO WIDGET
+                });
+              }
+          ),
+        }
       ),
     );
   }
+}
+
+class LineString {
+  LineString(this.lineString);
+  List<dynamic> lineString;
 }
