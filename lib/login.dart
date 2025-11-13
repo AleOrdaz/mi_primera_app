@@ -2,9 +2,11 @@ import 'package:app1920/mapa.dart';
 import 'package:app1920/principal.dart';
 import 'package:app1920/widgets/snackbar.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:app1920/constantes.dart' as cons;
 import 'package:flutter/scheduler.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
@@ -22,6 +24,9 @@ class _LoginState extends State<Login> {
   final password = TextEditingController();
 
   late AudioPlayer _audioPlayer;
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   @override
   void initState() {
@@ -154,6 +159,30 @@ class _LoginState extends State<Login> {
                 });
               },  //Funciones o acción a realizar al presionar el btn
               child: Text('Ingresar'), 
+            ),
+            SizedBox(height: size.height * 0.1,),
+            ElevatedButton(
+              onPressed: (){
+                setState(() {
+                  signInWithGoogle();
+                });
+              },
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: cons.azulito,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)
+                  ),
+                  fixedSize: Size(size.width * 0.75, 45)
+              ),
+              child: Text(
+                'Ingresar con GMAIL',
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                    letterSpacing: 2.5,
+                    color: cons.blanco
+                ),
+              ),
             )
           ],
         ),
@@ -191,5 +220,77 @@ class _LoginState extends State<Login> {
           hintText: text
       ),
     );
+  }
+
+  Future<User?> signInWithGoogle() async {
+    try {
+      FirebaseAuth.instance.setLanguageCode('es');
+
+      await _googleSignIn.signOut(); // Asegurar que no haya una sesión previa
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      if (googleUser == null) return null; // El usuario canceló el login
+
+      final GoogleSignInAuthentication googleAuth =
+      await googleUser.authentication;
+
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      UserCredential userCredential = await _auth.signInWithCredential(credential);
+      return userCredential.user;
+
+    } on FirebaseAuthException catch (e) {
+      switch (e.code) {
+        case 'account-exists-with-different-credential':
+        //menssageLogin = 'La cuenta ya existe con un proveedor diferente.';
+          break;
+        case 'invalid-credential':
+        //menssageLogin = 'Las credenciales no son válidas.';
+          break;
+        case 'user-disabled':
+        //menssageLogin = 'El usuario ha sido deshabilitado.';
+          break;
+        case 'user-not-found':
+        //menssageLogin = 'Usuario no encontrado.';
+          break;
+        case 'wrong-password':
+        //menssageLogin = 'Contraseña incorrecta.';
+          break;
+        case 'invalid-verification-code':
+        //menssageLogin = 'Código de verificación inválido.';
+          break;
+        case 'invalid-verification-id':
+        //menssageLogin = 'ID de verificación inválido.';
+          break;
+        default:
+          print('Error de FirebaseAuth: ${e.message}');
+      }
+      return null;
+
+    } catch (error) {
+      print("Error en el inicio de sesión: $error");
+
+      if(error.toString().contains('network_error')){
+        //menssageLogin = "Verifica tu conexión a internet";
+      } /*else {
+        menssageLogin = error.toString();
+      }*/
+
+      return null;
+    }
+  }
+
+  Future<void> signOut() async {
+    await _googleSignIn.signOut();
+    try {
+      await FirebaseAuth.instance.signOut();
+      print("Sesión cerrada exitosamente.");
+    } catch (e) {
+      print("Error al cerrar sesión: $e");
+    }
+    //await FacebookAuth.instance.logOut();
+    await _auth.signOut();
   }
 }
